@@ -270,8 +270,7 @@ function addFigure(g, src, cap) {
   const img = new Image();
   img.alt = cap; img.loading = 'lazy'; img.src = encodeURI(src);
   img.onerror = () => f.remove();
-  const c = document.createElement('figcaption'); c.textContent = cap;
-  f.append(img, c);
+  f.append(img);   // no visible caption; the name is kept only as hidden alt text
   f.onclick = () => { lbImg.src = img.src; lb.classList.add('on'); };
   g.append(f);
 }
