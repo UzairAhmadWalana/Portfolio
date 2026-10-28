@@ -1,537 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uzair Ahmad | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        :root {
-            --primary: #0a2540;
-            --secondary: #00d4ff;
-            --accent: #ff6b6b;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --dark-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --text-dark: #2d3748;
-            --text-light: #718096;
-            --shadow: 0 20px 40px rgba(0,0,0,0.1);
-            --shadow-hover: 0 30px 60px rgba(0,0,0,0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        #portfolio-content { 
-            background: transparent; 
-            padding-bottom: 40px; 
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-            background: linear-gradient(135deg, var(--bg-gradient));
-            color: white;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-
-        /* DARK BACKGROUND SECTION - Header to Key Achievements */
-        .dark-hero-section {
-            background: var(--dark-bg);
-            padding: 0 0 100px 0;
-            margin-bottom: -60px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #fff, #f0f8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.3);
-            margin: 0 auto 30px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05);
-            border-color: rgba(255,255,255,0.6);
-        }
-
-        /* Contact Links - NOW WITH pdf-hide CLASS */
-        .contact-links.pdf-hide {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-links a {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 1.4rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-        }
-
-        .contact-links a:hover::before { left: 100%; }
-        .contact-links a:hover {
-            transform: translateY(-10px) scale(1.1);
-            background: var(--secondary);
-            border-color: var(--secondary);
-            box-shadow: var(--shadow-hover);
-        }
-
-                /* Content Sections */
-        .content-wrapper {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 100px 0 40px 0;
-            border-radius: 40px 40px 0 0;
-            margin-top: -80px;
-            position: relative;
-            z-index: 2;
-        }
-
-        section {
-            margin-bottom: 80px;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-            position: relative;
-            text-align: center;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .subtitle {
-            font-size: 0.95rem;
-            color: var(--secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .achievement-card p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 0;
-        }
-
-        .achievement-card strong {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .timeline-item {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 0 auto 25px;
-            box-shadow: var(--shadow);
-            position: relative;
-            transition: all 0.3s ease;
-            max-width: 600px;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
-
-        .timeline-item h4 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .skills-grid li {
-            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.8));
-            padding: 20px 25px;
-            border-radius: 15px;
-            font-weight: 500;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .skills-grid li:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, var(--secondary), #00aaff);
-            color: white;
-        }
-
-        .slideshow-container {
-            max-width: 100%;
-            position: relative;
-            margin: 40px 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: var(--card-bg);
-        }
-
-        .mySlides img {
-            width: 100%;
-            height: 100%;
-            object-fit: relative;
-            transition: transform 0.6s ease;
-        }
-
-        .mySlides img:hover {
-            transform: scale(1.05);
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            font-size: 24px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 50%;
-        }
-
-        .prev { left: 20px; }
-        .next { right: 20px; }
-        .prev:hover, .next:hover { background: var(--secondary); }
-
-        .hidden {
-            opacity: 1;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        footer {
-            background: linear-gradient(135deg, var(--primary), #1a365d);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-            margin-top: 80px;
-        }
-
-        @media (max-width: 768px) {
-            .dark-hero-section { padding-bottom: 80px; }
-            .content-wrapper { margin-top: -60px; padding-top: 80px; }
-            .contact-links.pdf-hide { gap: 15px; }
-            .contact-links a { width: 50px; height: 50px; font-size: 1.2rem; }
-        }
-
-    </style>
+<meta name="description" content="Uzair Ahmad — Electrical Engineering Technologist and AI Solutions Developer. Portfolio with education, experience, certifications, volunteership and projects, each backed by proof documents.">
+<meta name="google-site-verification" content="Mgv5OhuKtJbV3M0fdsBfvyt0ixvWhz7cKNUOrt0-0P8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uzair Ahmad | Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0a2540;--secondary:#00d4ff;--accent:#ff6b6b;--bg-gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);--dark-bg:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f0f23 100%);--card-bg:rgba(255,255,255,.95);--text-dark:#2d3748;--text-light:#718096;--shadow:0 20px 40px rgba(0,0,0,.1);--shadow-hover:0 30px 60px rgba(0,0,0,.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);color:var(--text-dark);line-height:1.7;overflow-x:hidden}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+header{text-align:center;padding:120px 20px 80px;color:white;clip-path:polygon(0 0,100% 0,100% 85%,0 100%)}
+.dark-hero-section{background:var(--dark-bg);padding:0 0 100px;margin-bottom:-60px;position:relative;z-index:1}
+.hero-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;margin-bottom:10px;background:linear-gradient(45deg,#fff,#f0f8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:1.3rem;font-weight:300;margin-bottom:30px;opacity:.95}
+.profile-img{width:180px;height:180px;border-radius:50%;border:5px solid rgba(255,255,255,.3);margin:0 auto 30px;box-shadow:var(--shadow);transition:all .4s;animation:float 6s ease-in-out infinite;object-fit:cover}
+.contact-links{display:flex;justify-content:center;gap:20px;margin:30px 0 20px;flex-wrap:wrap}
+.contact-links a{width:60px;height:60px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:1.4rem;transition:all .4s}
+.contact-links a:hover{transform:translateY(-10px) scale(1.1);background:var(--secondary);border-color:var(--secondary);box-shadow:var(--shadow-hover)}
+.content-wrapper{background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:100px 0 40px;border-radius:40px 40px 0 0;margin-top:-80px;position:relative;z-index:2}
+section{margin-bottom:80px}
+h2{font-size:2.5rem;font-weight:700;color:var(--primary);margin-bottom:20px;position:relative;text-align:center}
+h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(45deg,var(--secondary),var(--accent));border-radius:2px}
+.subtitle{font-size:.95rem;color:var(--secondary);font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;text-align:center}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:40px}
+.card{background:var(--card-bg);padding:30px;border-radius:20px;box-shadow:var(--shadow);transition:all .4s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--secondary),var(--accent))}
+.card:hover{transform:translateY(-10px);box-shadow:var(--shadow-hover)}
+.card strong,.timeline-item strong{color:var(--primary);font-weight:600}
+.card h3{color:var(--primary);font-size:1.1rem;margin-bottom:8px}
+.card p,.card li{font-size:.95rem}
+.card ul,.timeline-item ul{padding-left:20px;margin-top:8px}
+.timeline-item{background:var(--card-bg);padding:30px;border-radius:15px;margin:0 auto 25px;box-shadow:var(--shadow);transition:all .3s;max-width:760px}
+.timeline-item:hover{transform:translateX(10px)}
+.timeline-item h4{color:var(--secondary);font-size:1.2rem;margin-bottom:10px}
+.timeline-item li{font-size:.95rem}
+.meta{color:var(--text-light);font-size:.9rem}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;list-style:none}
+.skills-grid li{background:var(--card-bg);padding:20px 25px;border-radius:15px;font-weight:500;text-align:center;box-shadow:var(--shadow);transition:all .3s}
+.skills-grid li:hover{transform:translateY(-5px);background:linear-gradient(135deg,var(--secondary),#00aaff);color:white}
+.skill-cat{text-align:left!important;font-size:.9rem;font-weight:400!important}
+.skill-cat b{display:block;color:var(--primary);margin-bottom:4px}
+.skills-grid li:hover b{color:white}
+/* Proof galleries */
+.proof-title{text-align:center;color:var(--primary);font-weight:600;font-size:1.1rem;margin:45px 0 18px}
+.proof-title i{color:var(--accent);margin-right:8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+.gallery figure{background:var(--card-bg);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;cursor:zoom-in;transition:all .3s}
+.gallery figure:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+.gallery img{width:100%;height:260px;object-fit:contain;background:#fff;display:block}
+.gallery figcaption{padding:12px 16px;font-size:.88rem;font-weight:500;text-align:center;color:var(--primary)}
+.gallery figure.missing{cursor:default;border:2px dashed var(--secondary)}
+.gallery figure.missing img{display:none}
+.gallery figure.missing::before{content:'Add image: ' attr(data-src);display:flex;align-items:center;justify-content:center;height:260px;padding:20px;text-align:center;color:var(--text-light);font-size:.85rem;word-break:break-all}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:99;cursor:zoom-out;padding:20px}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%;max-height:100%;border-radius:8px}
+.hidden{opacity:1;transform:translateY(50px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+.show{opacity:1;transform:translateY(0)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+footer{background:linear-gradient(135deg,var(--primary),#1a365d);color:white;text-align:center;padding:60px 20px;margin-top:80px}
+@media(max-width:768px){.dark-hero-section{padding-bottom:80px}.content-wrapper{margin-top:-60px;padding-top:80px}.contact-links a{width:50px;height:50px;font-size:1.2rem}.card-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-    <div id="portfolio-content">
-        <!-- DARK BACKGROUND WRAPPER -->
-        <div class="dark-hero-section">
-            <header class="hidden">
-                <div class="container">
-                    <div class="hero-title">Uzair Ahmad</div>
-                    <p class="hero-subtitle">Multidisciplinary Electrical Engineering Student & AI Solutions Developer</p>
-                    
-                    <img src="profile.jpeg" alt="Uzair Ahmad" class="profile-img" onerror="this.src='https://via.placeholder.com/180?text=Uzair'">
-                    
-                    <div style="margin-bottom: 40px; font-size: 1.1rem;">
-                        <p style="margin: 8px 0;"><strong>BSc Electrical Engineering Technology</strong></p>
-                        <p style="margin: 8px 0;">National Skills University, Islamabad</p>
-                        <p style="margin: 8px 0;">uzairahmadwalanapk786@gmail.com</p>
-                        <p style="margin: 8px 0;">+92 332 817 3807</p>
-                    </div>
+<div id="portfolio-content">
 
-                    <!-- SOCIAL ICONS WITH pdf-hide - HIDDEN IN PDF -->
-                    <div class="contact-links pdf-hide">
-                        <a href="tel:+923328173807" title="Call" aria-label="Call">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                        <a href="https://wa.me/923328173807" target="_blank" title="WhatsApp" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="mailto:uzairahmadwalanapk786@gmail.com" title="Email" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/uzair-ahmad-walana" target="_blank" title="LinkedIn" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    
-                </div>
-            </header>
-        </div>
+<div class="dark-hero-section">
+<header class="hidden"><div class="container">
+  <div class="hero-title">Uzair Ahmad</div>
+  <p class="hero-subtitle">Electrical Engineering Technologist │ AI, Embedded Systems &amp; Software Development</p>
+  <img id="profile" src="proofs/profile.jpeg" alt="Uzair Ahmad" class="profile-img" onerror="this.onerror=null;this.src='profile.jpeg'">
+  <div style="margin-bottom:40px;font-size:1.1rem">
+    <p><strong>BSc Electrical Engineering Technology</strong> · CGPA 3.59/4.00</p>
+    <p>National Skills University, Islamabad</p>
+    <p>Bhera, Sargodha, Punjab, Pakistan</p>
+    <p>uzairaw2005@gmail.com</p>
+    <p>+92 332 817 3807</p>
+  </div>
+  <div class="contact-links">
+    <a href="tel:+923328173807" title="Call" aria-label="Call"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/923328173807" target="_blank" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:uzairaw2005@gmail.com" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://www.linkedin.com/in/uzair-ahmad-walana" target="_blank" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</div></header>
+</div>
 
-        <!-- LIGHT CONTENT AREA -->
-        <div class="content-wrapper">
-            <div class="container">
-                <section class="hidden">
-                    <h2>Key Career Achievements</h2>
-                    <p class="subtitle">MY BACKGROUND</p>
-                    <div class="card-grid">
-                        <div class="card achievement-card">
-                            <p><strong>AI Diagnostic Solutions:</strong> Designed low-cost AI-integrated Uroflow Meter for accessible urological diagnostics.</p>
-                        </div>
-                        <div class="card achievement-card">
-                            <p><strong>Time-Series Modeling:</strong> Optimized ML pipelines with CatBoost & Scikit-learn on ONNIOT for accurate forecasting.</p>
-                        </div>
-                        <div class="card achievement-card">
-                            <p><strong>Smart Irrigation:</strong> Sensor-driven automation improving agricultural water management efficiency.</p>
-                        </div>
-                        <div class="card achievement-card">
-                            <p><strong>Renewable Energy:</strong> Water-cooled PV system & solar EV prototype with enhanced energy efficiency.</p>
-                        </div>
-                        <div class="card achievement-card">
-                            <p><strong>Hardware-Software:</strong> Camera UAV & 3-phase inverter with intelligent system integration.</p>
-                        </div>
-                    </div>
-                </section>
+<div class="content-wrapper"><div class="container">
 
-                <!-- All other sections remain exactly the same -->
-                <section class="hidden">
-                    <h2>Education</h2>
-                    <p class="subtitle">WHAT I'VE LEARNED</p>
-                    <div class="timeline-item">
-                        <h4>Expected 2026</h4>
-                        <p><strong>BSc Electrical Engineering Technology</strong></p>
-                        <p>National Skills University, Islamabad</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>2022</h4>
-                        <p><strong>F.Sc (Pre-Engineering) - Grade: C</strong></p>
-                        <p>BISE Sargodha</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>2020</h4>
-                        <p><strong>Matriculation (SSC) - Grade: A</strong></p>
-                        <p>BISE Sargodha</p>
-                    </div>
-                </section>
+<section class="hidden" id="profile-section">
+  <h2>Profile</h2><p class="subtitle">About Me</p>
+  <div class="timeline-item"><p>Multidisciplinary Electrical Engineering graduate (BSc EET, CGPA 3.59/4.00) with hands-on experience across electronics, telecommunications, embedded systems, computer systems, and artificial intelligence. Adept at designing end-to-end engineering solutions by combining circuit-level understanding with software-driven intelligence, including machine learning and time-series analysis. Proven ability to bridge hardware and software domains to develop efficient, scalable, and intelligent systems. Strong analytical and problem-solving skills with a focus on real-world engineering applications. Aiming to leverage cross-domain expertise in roles involving smart systems, embedded AI, and advanced technological development.</p></div>
+</section>
 
-                <section class="hidden">
-                    <h2>Experience</h2>
-                    <p class="subtitle">WHERE I'VE WORKED</p>
-                    <div class="timeline-item">
-                        <h4>2025–Present</h4>
-                        <p><strong>AI & Time-Series Modeling</strong></p>
-                        <p>ONNIOT</p>
-                    </div>
-                </section>
+<section class="hidden">
+  <h2>Key Career Achievements</h2><p class="subtitle">My Background</p>
+  <div class="card-grid">
+    <div class="card"><p><strong>AI Diagnostic Solutions:</strong> Designed low-cost AI-integrated Uroflow Meter for accessible urological diagnostics.</p></div>
+    <div class="card"><p><strong>Time-Series Modeling:</strong> Optimized ML pipelines with CatBoost &amp; Scikit-learn on ONNIOT for accurate forecasting.</p></div>
+    <div class="card"><p><strong>Smart Irrigation:</strong> Sensor-driven automation improving agricultural water management efficiency.</p></div>
+    <div class="card"><p><strong>Renewable Energy:</strong> Water-cooled PV system &amp; solar EV prototype with enhanced energy efficiency.</p></div>
+    <div class="card"><p><strong>Hardware-Software:</strong> Camera UAV &amp; 3-phase inverter with intelligent system integration.</p></div>
+    <div class="card"><p><strong>Leadership &amp; Community:</strong> Aspire Leaders Program (Harvard-affiliated) and YouthFied Founding Member &amp; Ambassador.</p></div>
+  </div>
+</section>
 
-                <section class="hidden">
-                    <h2>Skills</h2>
-                    <p class="subtitle">WHAT I BRING</p>
-                    <ul class="skills-grid">
-                        <li>Python (ML, Data Analysis)</li>
-                        <li>CatBoost & Scikit-learn</li>
-                        <li>Circuit Design & Analysis</li>
-                        <li>PCB Troubleshooting</li>
-                        <li>Embedded Systems</li>
-                        <li>Sensor Integration</li>
-                        <li>MATLAB & Proteus</li>
-                        <li>AutoCAD</li>
-                        <li>MS Office & Project</li>
-                    </ul>
-                </section>
+<!-- ============ EDUCATION ============ -->
+<section class="hidden" id="education">
+  <h2>Education</h2><p class="subtitle">What I've Learned</p>
+  <div class="timeline-item"><h4>20 Sep 2022 – 24 Jul 2026</h4>
+    <p><strong>Bachelor of Science in Electrical Engineering Technology (BSc EET)</strong></p>
+    <p>National Skills University, Islamabad</p>
+    <p class="meta">CGPA 3.59/4.00 (Grade B+) · 89.8% · Good Standing · 131 Credit Hours</p></div>
+  <div class="timeline-item"><h4>20 Oct 2020 – 20 Oct 2022</h4>
+    <p><strong>F.Sc (Pre-Engineering)</strong></p><p>BISE Sargodha</p><p class="meta">Grade: C</p></div>
+  <div class="timeline-item"><h4>19 Sep 2018 – 19 Sep 2020</h4>
+    <p><strong>Matriculation (SSC)</strong></p><p>BISE Sargodha</p><p class="meta">Grade: A</p></div>
+  <p class="proof-title"><i class="fas fa-file-alt"></i>Educational Documents</p>
+  <div class="gallery" data-proof="education"></div>
+</section>
 
-                <section class="hidden">
-                    <h2>Languages</h2>
-                    <p class="subtitle">HOW I COMMUNICATE</p>
-                    <ul class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                        <li>English (Professional)</li>
-                        <li>Urdu (Native)</li>
-                        <li>Punjabi (Fluent)</li>
-                    </ul>
-                </section>
-                    <h2>Awards & Certificates</h2>
-                    <p class="subtitle">WHERE I SHINE</p>
-                    <div class="slideshow-container">
-                        <div class="mySlides">
-                            <img src="Computer Cert.png" alt="Certificate 1" onerror="this.src='https://via.placeholder.com/?text=Certificate+1'">
-                      <!--  </div>
-                        <div class="mySlides">
-                            <img src="certificate2.jpg" alt="Certificate 2" onerror="this.src='https://via.placeholder.com/?text=Certificate+2'">
-                        </div>
-                        <div class="mySlides">
-                            <img src="project1.jpg" alt="Project" onerror="this.src='https://via.placeholder.com/?text=Project+Image'">
-                        </div>
-                        <button class="prev" onclick="plusSlides(-1)">❮</button>
-                        <button class="next" onclick="plusSlides(1)">❯</button>
-                    </div> 
-                </section>
-            </div> 
-        </div>
--->
-        <footer class="hidden">
-            <div class="container">
-                     <p style="font-size: 1rem; opacity: 0.9;">© 2025 Uzair Ahmad. All Rights Reserved.</p>
-            </div>
-        </footer>
-    </div>
+<!-- ============ EXPERIENCE ============ -->
+<section class="hidden" id="experience">
+  <h2>Experience</h2><p class="subtitle">Where I've Worked</p>
+  <div class="timeline-item"><h4>01 Sep 2025 – 25 Jun 2026</h4>
+    <p><strong>AI &amp; Time-Series Modeling</strong> — ONNIOT</p>
+    <ul><li>Developing and evaluating machine learning models for time-series forecasting and predictive analysis.</li>
+    <li>Performing data preprocessing, feature engineering, and model optimization using Python and R.</li>
+    <li>Working with algorithms such as regression models and ensemble methods (e.g., CatBoost).</li>
+    <li>Implementing model evaluation techniques using MAE, RMSE, and R² metrics.</li>
+    <li>Visualizing model performance and trends using interactive tools (e.g., Plotly).</li>
+    <li>Gaining hands-on experience in building end-to-end data-driven pipelines for real-world applications.</li>
+    <li>Building Retrieval-Augmented Generation (RAG) pipelines using LangChain, TensorFlow/PyTorch, and vector databases (Pinecone, Chroma, FAISS) to enable context-aware, data-driven query and response systems.</li>
+    <li>Managing isolated Python environments with Anaconda and containerizing applications using Docker for consistent, reproducible deployment.</li></ul></div>
+  <div class="timeline-item"><h4>11 Nov 2025 – 11 Apr 2026</h4>
+    <p><strong>Trainee Electrical Engineer</strong> — Shahtaj Sugar Mills Limited, Mandi Bahauddin</p>
+    <ul><li>Gained hands-on exposure to industrial electrical systems, including power distribution, switchgear, and motor control within a large-scale manufacturing plant.</li>
+    <li>Assisted senior engineers in monitoring, troubleshooting, and maintaining electrical equipment to support safe and efficient plant operations.</li>
+    <li>Observed and supported PLC-based automation and control processes used across sugar mill production lines.</li>
+    <li>Participated in routine safety inspections and adherence to industrial electrical safety standards.</li>
+    <li>Developed practical, real-world understanding of electrical engineering principles in a heavy-industry setting.</li></ul></div>
+  <div class="timeline-item"><h4>06 Oct 2025 – 06 Jan 2026</h4>
+    <p><strong>Remote Internship Program</strong> — Rhombix Technologies</p>
+    <ul><li>Completed a 3-month multi-track remote internship spanning Python Programming, Web Development, Machine Learning, C++ Programming, and Android App Development.</li>
+    <li>Built practical exercises and mini-projects in Python, reinforcing core programming and data-handling concepts.</li>
+    <li>Developed web development fundamentals with HTML, CSS, and Bootstrap/Tailwind CSS, and worked with Node.js, Express.js, MongoDB, Firebase, and Supabase for backend logic and data storage, Postman and ngrok for local API testing, and Vercel for deployment.</li>
+    <li>Applied machine learning concepts through guided projects and model-building exercises in Jupyter Notebook.</li>
+    <li>Practiced C++ programming for problem-solving and software fundamentals.</li>
+    <li>Built and tested Android applications using Android Studio with Kotlin and Java, integrating Firebase for authentication and real-time data storage.</li>
+    <li>Used Git and GitHub for version control and VS Code as the primary development environment throughout the internship.</li>
+    <li>Received a formal Letter of Recommendation from Rhombix Technologies (06 Jan 2026) recognizing strong technical aptitude, professionalism, and initiative.</li></ul></div>
+  <p class="proof-title"><i class="fas fa-file-signature"></i>Experience Letters</p>
+  <div class="gallery" data-proof="experience"></div>
+</section>
 
-    <!-- SAME FIXED PDF SCRIPT -->
-    <script>
-        // Scroll Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('show');
-                    }, index * 100);
-                }
-            });
-        }, { threshold: 0.1 });
+<!-- ============ CERTIFICATIONS ============ -->
+<section class="hidden" id="certifications">
+  <h2>Certifications</h2><p class="subtitle">Where I Shine</p>
+  <div class="timeline-item"><h4>08 Nov 2025 – 20 Dec 2025</h4>
+    <p><strong>Aspire Leaders Program</strong> — Aspire Institute (Harvard-affiliated)</p>
+    <p class="meta">40 hours of coursework across two modules: Personal &amp; Professional Development (Module 1, co-created with Harvard Business School) and Leadership, Trust, AI &amp; Community Impact via the Aspire Horizons Course (Module 2, delivered by Harvard faculty). Selected among 9,988 finalists out of 54,337 students in Cohort 5 of the 2025 program year.</p></div>
+  <div class="timeline-item"><h4>06 Oct 2025 – 06 Jan 2026</h4>
+    <p><strong>Certificates of Completion</strong> — Rhombix Technologies (Remote Internship Program)</p>
+    <p class="meta">Python, Web Development, Machine Learning, C++, and Android App Development (issued 06 Jan 2026).</p></div>
+  <div class="timeline-item"><h4>21 Jul 2026 – 24 Jul 2026</h4>
+    <p><strong>NESTGEN E-Learning Festival 2026</strong> — Nestlé "needs YOUth" Program</p>
+    <p class="meta">Completed 16 masterclasses across four professional tracks: Digital &amp; Marketing, 21 Jul (brand building, AI-powered personalization, conversational commerce); Manufacturing &amp; Engineering, 22 Jul (smart factories, robotics, factory automation, energy-efficient operations); Finance &amp; Entrepreneurship, 23 Jul (FinTech, AI-powered financial planning, start-up acceleration, digital auditing); and Supply Chain &amp; Logistics, 24 Jul (green logistics, smart transport, real-time visibility).</p></div>
+  <div class="timeline-item"><h4>01 Jun 2022 – 30 Aug 2022</h4>
+    <p><strong>Diploma in Computer Sciences (D.C.S.)</strong> — Jinnah Institute of Information Technology, Bhera</p>
+    <p class="meta">Grade A+. Coursework covered MS Windows (7/8) &amp; MS Office, Inpage (Urdu), and Internet/Email use, with a typing speed of 45 WPM.</p></div>
+  <p class="proof-title"><i class="fas fa-award"></i>Certificates</p>
+  <div class="gallery" data-proof="certifications"></div>
+</section>
 
-        document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+<!-- ============ VOLUNTEERSHIP ============ -->
+<section class="hidden" id="volunteership">
+  <h2>Volunteership</h2><p class="subtitle">Giving Back</p>
+  <div class="timeline-item"><h4>12 Jun 2026 – Present</h4>
+    <p><strong>Founding Member &amp; Ambassador</strong> — YouthFied (Pakistan Youth Platform)</p>
+    <p class="meta">Registration No: YF-FM-26/0599</p>
+    <ul><li>Formally recognized by YouthFied's founder for commitment, trust, and contribution toward the platform's mission of creating opportunities for young people across Pakistan in education, skills development, career guidance, internships, and youth empowerment.</li>
+    <li>Appreciation letter issued 30 Sep 2026 (Ref: YF/FM/APL/1726), shown below.</li></ul></div>
+  <p class="proof-title"><i class="fas fa-hands-helping"></i>Appreciation Letter</p>
+  <div class="gallery" data-proof="volunteership"></div>
+</section>
 
-        // Slideshow
-        let slideIndex = 1;
-        showSlides(slideIndex);
+<!-- ============ PROJECTS ============ -->
+<section class="hidden" id="projects">
+  <h2>Projects</h2><p class="subtitle">What I've Built</p>
+  <div class="timeline-item"><h4>Final Year Project · 18 Sep 2024 – 30 Jun 2025</h4>
+    <p><strong>Low-Cost AI-Integrated Uroflow Meter</strong></p>
+    <ul><li>Designed a biomedical device to measure urine flow rate for diagnosing urinary tract conditions.</li>
+    <li>Integrated artificial intelligence for precise data analysis and processing in uroflowmetry.</li>
+    <li>Developed a cost-effective solution to improve accessibility of urological diagnostics.</li>
+    <li>Applied electrical engineering and AI concepts to healthcare technology in Pakistan's context.</li></ul></div>
+  <div class="card-grid">
+    <div class="card"><h3>Camera-Integrated UAV for Real-Time Monitoring</h3><p>Quadcopter for aerial surveillance with live video transmission, motor control and power management.</p></div>
+    <div class="card"><h3>Educational Model of Pakistan's Power System</h3><p>Scaled working model of generation, transmission and distribution, including load-flow concepts.</p></div>
+    <div class="card"><h3>Smart Irrigation System Using Sensors</h3><p>Soil-moisture sensors and microcontroller logic for efficient, automated water usage.</p></div>
+    <div class="card"><h3>Automatic Water Tap Controller</h3><p>IR hand detection with relay/solenoid valve for touchless flow and less water wastage.</p></div>
+    <div class="card"><h3>Flex Sensor-Based LED Indication Using 5 Comparators</h3><p>Analog circuit using a flex sensor and five comparators for a 5-level real-time bend display.</p></div>
+    <div class="card"><h3>Voltage Divider Circuit</h3><p>Designed, calculated and verified resistive dividers for signal conditioning and reference voltages.</p></div>
+    <div class="card"><h3>Arduino-Based 12V DC to 3-Phase AC Inverter</h3><p>Low-cost Arduino and MOSFET inverter using PWM to drive small motors.</p></div>
+    <div class="card"><h3>Water-Cooled Photovoltaic System for Efficiency Improvement</h3><p>Controlled water cooling of a solar panel, showing improved output through thermal regulation.</p></div>
+    <div class="card"><h3>Solar-Powered Car with Battery Storage</h3><p>Prototype electric vehicle with solar charging and battery backup.</p></div>
+    <div class="card"><h3>Solar Power Plant Feasibility Comparison Using SAM</h3><p>Compared energy yield, capacity factor and LCOE for solar plants across countries using NREL's SAM.</p></div>
+    <div class="card"><h3>iPhone 6 3D Model Design Using AutoCAD</h3><p>Detailed 3D solid model and rendering with precise dimensioning.</p></div>
+    <div class="card"><h3>Image Quality Enhancement Using MATLAB</h3><p>Noise reduction, contrast enhancement and sharpening, with before/after quality metrics.</p></div>
+  </div>
+</section>
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+<!-- ============ SKILLS ============ -->
+<section class="hidden" id="skills">
+  <h2>Skills</h2><p class="subtitle">What I Bring</p>
+  <ul class="skills-grid">
+    <li class="skill-cat"><b>Programming &amp; AI</b>Python (ML, Time-Series Forecasting, Data Analysis), R Programming, Scikit-learn, CatBoost, Pandas, NumPy, TensorFlow &amp; PyTorch, RAG Pipeline Development, LangChain, Vector Databases (Pinecone, Chroma, FAISS), Jupyter Notebook</li>
+    <li class="skill-cat"><b>Electrical &amp; Electronics</b>Circuit Design and Analysis, Analog and Digital Electronics, PCB-level Understanding and Troubleshooting</li>
+    <li class="skill-cat"><b>Embedded &amp; Systems</b>Embedded Systems Fundamentals, Sensor Integration and Signal Processing, Hardware–Software Co-design</li>
+    <li class="skill-cat"><b>Simulation &amp; Engineering Tools</b>MATLAB, Proteus, AutoCAD, National Instruments Multisim, OpenPLC, Dev C++, Arduino IDE &amp; Arduino Programming, System Advisor Model (SAM)</li>
+    <li class="skill-cat"><b>Data &amp; Visualization</b>Data Preprocessing and Feature Engineering, Model Evaluation (MAE, RMSE, R²), Plotly / Data Visualization</li>
+    <li class="skill-cat"><b>Software Development &amp; Web</b>HTML, CSS, Bootstrap &amp; Tailwind CSS, Node.js, Express.js, MongoDB, Firebase &amp; Supabase, Postman &amp; ngrok, Git &amp; GitHub, Vercel, VS Code, Android Studio, Kotlin &amp; Java, Docker, Anaconda, Linux &amp; Ubuntu</li>
+    <li class="skill-cat"><b>Office &amp; Productivity</b>MS Word, MS Excel, MS PowerPoint, MS Project</li>
+    <li class="skill-cat"><b>Interpersonal Skills</b>Technical Communication &amp; Teaching Ability, Analytical Problem-Solving, Team Collaboration, Adaptability, Self-Driven &amp; Continuous Improvement</li>
+  </ul>
+</section>
 
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("mySlides");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex - 1].style.display = "block";
-        }
+<section class="hidden" id="languages">
+  <h2>Languages</h2><p class="subtitle">How I Communicate</p>
+  <ul class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <li>Urdu (Native)</li><li>English (Professional)</li><li>Punjabi (Fluent)</li>
+  </ul>
+</section>
 
-        setInterval(() => plusSlides(1), 5000);
+</div></div>
 
-            </script>
+<footer class="hidden"><div class="container">
+  <p style="font-size:1rem;opacity:.9">© 2026 Uzair Ahmad. All Rights Reserved.</p>
+</div></footer>
+</div>
+
+<div id="lightbox"><img alt=""></div>
+
+<script>
+/* =====================================================================
+   AUTO PROOF GALLERIES — no file list to edit.
+   Upload pictures into the "proofs" folder on GitHub and name them:
+     edu-...   -> Education        (e.g. edu-bsc-degree.jpg)
+     exp-...   -> Experience       (e.g. exp-onniot-letter.jpg)
+     cert-...  -> Certifications   (e.g. cert-aspire.png)
+     vol-...   -> Volunteership    (e.g. vol-youthfied-letter.jpg)
+   The caption is made from the file name (edu-bsc-degree.jpg -> "Bsc Degree").
+   ===================================================================== */
+const GITHUB_REPO = "uzairahmadwalana/Portfolio";   // your GitHub username/repository
+const FOLDER = "proofs";                             // folder holding the pictures ("" = main folder)
+const PREFIXES = { edu: "education", exp: "experience", cert: "certifications", vol: "volunteership" };
+/* Pictures stored somewhere else can be added by hand: [path, caption]  (normally empty) */
+const EXTRA = {};
+
+const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+const niceCaption = n => n.replace(/\.[^.]+$/, '').replace(/^(edu|exp|cert|vol)[-_ ]/i, '')
+  .replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+function addFigure(g, src, cap) {
+  const f = document.createElement('figure');
+  const img = new Image();
+  img.alt = cap; img.loading = 'lazy'; img.src = encodeURI(src);
+  img.onerror = () => f.remove();
+  const c = document.createElement('figcaption'); c.textContent = cap;
+  f.append(img, c);
+  f.onclick = () => { lbImg.src = img.src; lb.classList.add('on'); };
+  g.append(f);
+}
+
+async function getFileNames() {
+  const key = 'proofFiles';
+  try { const c = JSON.parse(sessionStorage.getItem(key)); if (c) return c; } catch (e) {}
+  const r = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${FOLDER}`);
+  if (!r.ok) throw new Error('GitHub list failed');
+  const names = (await r.json()).filter(f => f.type === 'file').map(f => f.name);
+  try { sessionStorage.setItem(key, JSON.stringify(names)); } catch (e) {}
+  return names;
+}
+
+(async function loadProofs() {
+  const found = { education: [], experience: [], certifications: [], volunteership: [] };
+  try {
+    const names = await getFileNames();
+    const pic = names.find(n => /^profile\.(jpe?g|png|webp)$/i.test(n));   // profile picture, any extension
+    if (pic) document.getElementById('profile').src = encodeURI((FOLDER ? FOLDER + '/' : '') + pic);
+    names.sort((x, y) => x.localeCompare(y, undefined, { numeric: true }))
+      .forEach(name => {
+        const m = name.match(/^(edu|exp|cert|vol)[-_ ]/i);
+        if (m && /\.(jpe?g|png|webp|gif)$/i.test(name))
+          found[PREFIXES[m[1].toLowerCase()]].push([(FOLDER ? FOLDER + '/' : '') + name, niceCaption(name)]);
+      });
+  } catch (e) { console.warn('Could not read the proofs folder:', e); }
+  document.querySelectorAll('.gallery').forEach(g => {
+    const list = [...(found[g.dataset.proof] || []), ...(EXTRA[g.dataset.proof] || [])];
+    list.forEach(([src, cap]) => addFigure(g, src, cap));
+    if (!list.length) g.innerHTML = '<p class="meta" style="text-align:center;grid-column:1/-1">Documents available on request.</p>';
+  });
+})();
+lb.onclick = () => lb.classList.remove('on');
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('show'), i * 100); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
